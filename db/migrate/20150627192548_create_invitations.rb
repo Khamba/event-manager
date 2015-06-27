@@ -4,9 +4,11 @@ class CreateInvitations < ActiveRecord::Migration
       t.integer :event_id
       t.integer :user_id
       t.boolean :from_event_to_user
-      t.boolean :delined
+      t.boolean :delined, default: false
 
       t.timestamps null: false
     end
+
+    add_index :invitations, :user_id
   end
 end
