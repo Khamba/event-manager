@@ -1,0 +1,36 @@
+<% #Show event info (name, date, place, creator name %>
+<b>Event Info</b>
+<%= render 'event', :event => @event %>
+<br>
+<% #Show who all are coming %>
+<b>Attending Users</b> <br>
+<% @event.attending_users.each do |user| %>
+	<p><%= link_to user.name, user %>/</p>
+<% end %>
+
+<% if @event.attending_users.count == 0 %>
+	<p>No attending users</p>
+<% end %>
+
+<br><br><br>
+<% #Show who all are invited %>
+<b>Invited Users</b> <br>
+<% @event.invited_users.each do |user| %>
+	<p><%= link_to user.name, user %></p>
+<% end %>
+
+<% if @event.invited_users.count == 0 %>
+	<p>No invited users</p>
+<% end %>
+
+<br><br><br>
+<% # if creator == current_user allow inviting by user email, and see requested invitations %>
+
+<% if current_user == @event.created_by_user %>
+	<%= form_for(:invitation, url: invitations_path, method: :post ) do |f| %>
+		<%= f.label :email, "Enter email of user to invite to this event" %><br><br>
+		<%= f.text_field :email %><br><br>
+
+		<%= f.submit :Invite %>
+	<% end %>
+<% end %>

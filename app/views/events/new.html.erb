@@ -1,0 +1,21 @@
+<% if @event.errors.any? %>
+	<% @event.errors.each do |error, message| %>
+		<%= "#{error.capitalize.to_s.split("_").join(" ")}: #{message}" %> <br>
+	<% end %>
+<% end %>
+<br><br>
+
+<%= form_for @event do |f| %>
+
+	<%= f.label :name, "Event name" %><br>
+	<%= f.text_field :name %><br><br>
+
+	<%= f.label :date, 'Event date' %><br>
+	<%= f.date_select :date, start_year: Date.today.year, end_year: Date.today.year + 15 %><br><br>
+
+	<%= f.label :place, "Where is the event taking place?" %><br>
+	<%= f.text_field :place %><br><br>
+
+	<%= f.submit "Create Event" %>
+
+<% end %>

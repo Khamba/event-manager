@@ -1,0 +1,35 @@
+<% if current_user == @user %>
+	<%= link_to "Edit profile info", edit_user_path(id: current_user.id) %>
+	<br><br><br>
+<% end %>
+
+<% # The events this user is going to %>
+<b>Events going to:</b>
+
+<% @user.attending_events.each do |event| %>
+	<p><%= link_to event.name, event %></p>
+<% end %>
+
+<% if @user.attending_events.count == 0 %>
+	<p>None</p>
+<% end %>
+<br><br>
+
+<b>Events made:</b>
+<% @user.created_events.each do |event| %>
+	<p><%= link_to event.name, event %></p>
+<% end %>
+
+<% if @user.created_events.count == 0 %>
+	<p>None </p>
+<% end %>
+<br><br><br>
+
+
+Member since: <%= time_ago_in_words(@user.created_at) %>
+<br><br>
+
+<% if current_user == @user %>
+	<br><br><br>
+	<%= link_to "Delete account", @user, method: :delete %>
+<% end %>

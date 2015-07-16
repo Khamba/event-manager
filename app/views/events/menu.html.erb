@@ -1,0 +1,39 @@
+<b>Events i am hosting: </b><br><br>
+	<% @user.attending_events.each do |event| %>
+	<p><%= link_to event.name, event %></p>
+<% end %>
+
+<% if @user.attending_events.count == 0 %>
+	<p>None </p>
+<% end %>
+<br><br>
+
+<b>Events i am going to</b> <br><br>
+<% @user.created_events.each do |event| %>
+	<p><%= link_to event.name, event %></p>
+<% end %>
+
+<% if @user.created_events.count == 0 %>
+	<p>None </p>
+<% end %>
+<br><br>
+
+<b>Events i am invited to</b> <br><br>
+<% @user.invitations.each do |invitation| %>
+	<p><%= link_to invitation.event.name, invitation.event %></p>
+<% end %>
+
+<% if @user.invitations.count == 0 %>
+	<p>None </p>
+<% end %>
+<br><br><br>
+
+<b>Events i requested an inviation to</b> <br><br>
+<% @user.requested_invitations.each do |requested_invitation| %>
+	<p><%= link_to requested_invitation.event.name, requested_invitation.event %></p>
+<% end %>
+
+<% if @user.requested_invitations.count == 0 %>
+	<p>None </p>
+<% end %>
+<br><br><br>
